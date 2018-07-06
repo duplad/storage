@@ -6,6 +6,7 @@ class Storage
     private $name;
     private $addr;
     private $storage;
+    private $productList;
 
     public function __construct($name, $addr, $storage)
     {
