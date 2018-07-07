@@ -44,6 +44,9 @@ class ListItem
 
     public function __toString()
     {
-        return var_dump($this);
+        $respond = '<div class="product">';
+        $respond .= 'Termék: '.$this->product->getName().' Mennyiség: '.$this->getQuantity();
+        $respond .= '</div>';
+        return $respond;
     }
 }

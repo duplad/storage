@@ -103,6 +103,11 @@ class ProductList
 
     public function __toString()
     {
-        return var_dump($this);
+        $respond = '';
+        for ($i=0; $i < count($this->list); $i++) { 
+            $item = $this->list[$i];
+            $respond .= $item;
+        }
+        return $respond;
     }
 }

@@ -8,6 +8,7 @@ foreach (core\View::$vars[$__cname] as $key => $value) {
     $$key = $value;
 }
 
-print "<H1>Raktárak</H1>";
+$storage = $storageList->getStorageById($id);
 
-print $storageList;
+print "<h1>".$storage->getName()."</h1>";
+print $storage->getProducts();

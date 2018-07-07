@@ -91,8 +91,26 @@ class Storage
         return $this;
     }
 
+    public function getProducts()
+    {
+        $respond = '<div class="row"><div class="col">';
+        $respond .= $this->productList;
+        $respond .= '</div></div>';
+        return $respond;
+    }
+
     public function __toString()
     {
-        return var_dump($this);
+        $respond = '<div class="storage-head">Név: </div>';
+        $respond .= '<div class="storage-val">'.$this->getName().'</div>';
+        $respond .= '<div class="storage-head">Cím: </div>';
+        $respond .= '<div class="storage-val">'.$this->getAddr().'</div>';
+        $respond .= '<div class="storage-head">Kapacitás: </div>';
+        $respond .= '<div class="storage-val">'.$this->getCapacity().'</div>';
+        $respond .= '<div class="storage-head">Foglalt: </div>';
+        $respond .= '<div class="storage-val">'.$this->getCurrentLoad().'</div>';
+        $respond .= '<div class="storage-btn"><a class="" href="storage/index/'.$this->getId().'">Készlet</a></div>';
+
+        return $respond;
     }
 }

@@ -105,6 +105,16 @@ class StorageList
         return true;
     }
 
+    public function getStorageById($id){
+        $find = -1;
+        for ($i=0; $i < count($this->storages) && $find == -1; $i++) {
+            if ($this->storages[$i]->getId() == $id) {
+                $find = $i;
+            }
+        }
+        return $this->storages[$find];
+    }
+
     public function addProduct($id, $name, $price, $brand, $amount = 1)
     {
         try{
@@ -139,6 +149,19 @@ class StorageList
 
     public function __toString()
     {
-        return var_dump($this);
+        $respond = '';
+        for ($i=0; $i < count($this->storages); $i++) {
+            if($i % 3 == 0){
+				$respond .= "<div class=\"row\">";
+			} 
+            $respond .= "<div class=\"storage col-sm-4\">".$this->storages[$i]."</div>";
+            if ($i % 3 == 2) {
+				$respond .= "</div>";
+			}
+        }
+        if($i % 3 != 0){
+			$respond .= "</div>";
+        }
+        return $respond;
     }
 }

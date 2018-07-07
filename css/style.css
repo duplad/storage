@@ -1,31 +1,8 @@
-.product img{
-	height: 300px;
-}
-.admin-product img, .admin-img{
-	height: 100px;
-}
-.admin-product .picture{
-	width: 30%;
-}
-.admin-product .description{
-	width: 70%;
-}
-.admin-product .modify{
-	width: 40%;
-	margin: 0 auto;
-}
 .clean{
 	clear: both;
 }
 .row{
 	margin-bottom: 20px;
-}
-.picture, .name{
-	text-align: center;
-}
-#description{
-	width: 100%;
-	height: 120px;
 }
 
 .error, .success{
