@@ -1,5 +1,5 @@
 <?php
-namespace app\custom;
+namespace app\library;
 
 class Storage
 {
@@ -15,13 +15,13 @@ class Storage
         $this->name = $name;
         $this->addr = $addr;
         $this->capacity = $capacity;
-        $this->productList = new \storage\ProductList();
+        $this->productList = new ProductList();
     }
 
     public function addProduct($id, $name, $price, $brand, $amount = 1)
     {
         if (($this->productList->getCurrentLoad() + $amount) < $this->capacity) {
-            $product = new \storage\Product($id, $name, $price, $brand);
+            $product = new Product($id, $name, $price, $brand);
             $this->productList->addProduct($product, $amount);
         } else {
             throw new Exception("Not enought storage space!", 1);

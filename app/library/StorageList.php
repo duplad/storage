@@ -1,5 +1,5 @@
 <?php
-namespace app\custom;
+namespace app\library;
 
 class StorageList
 {
@@ -38,10 +38,10 @@ class StorageList
         if ($id == -1) {
             $id = $this->getNextId();
         } elseif ($this->isExist($id)) {
-            throw new Exception("Storage already exist", 1);
+            throw new \Exception("Storage already exist", 1);
             return false;
         }
-        $storage = new \storage\Storage($id, $name, $addr, $capacity);
+        $storage = new Storage($id, $name, $addr, $capacity);
         $this->storages[] = $storage;
         $this->totalCapacity += $capacity;
         return true;

@@ -5,40 +5,39 @@ class Controller
 {
     protected function __autoload($name)
     {
-        $name = ucfirst($name);
-        $inc_path = [
-            __ROOT__."/app/model/$name.php",
-            __ROOT__."/app/view/$name.php",
-            __ROOT__."/app/class/$name.php"
-        ];
+        $namePart = explode("app\\", $name);
+        $name = $namePart[count($namePart)-1];
+        $parts = explode('\\', $name);
+        $parts[count($parts)-1] = ucfirst($parts[count($parts)-1]);
+        $file = __ROOT__.DIRECTORY_SEPARATOR."app".DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $parts).".php";
     
-        $stop = false;
-        for ($i=0; $i<count($inc_path) && !$stop; $i++) {
-            $inc = $inc_path[$i];
-            if (file_exists($inc)) {
-                $stop = true;
-                if (is_readable($inc)) {
-                    include_once $inc;
-                } else {
-                    throw new \Exception("$name.php file does not readable.");
-                }
+        if (file_exists($file)) {
+            if (is_readable($file)) {
+                require_once $file;
+            } else {
+                throw new \Exception("$file file does not readable.");
             }
-        }
-        
-        if (!$stop) {
-            throw new \Exception("$name.php file does not exists.");
+        } else {
+            throw new \Exception("$file file does not exists.");
         }
     }
     
+    protected function getClassName($name)
+    {
+        $parts = explode('\\', $name);
+        return $parts[count($parts)-1];
+    }
+
     public function loadModel($model)
     {
-        $this->$model = new $model();
+        $className = $this->getClassName($model);
+        $this->$className = new $model();
     }
 
     public function loadView($view, $data = false)
     {
         View::$vars[lcfirst($view)] = $data;
-        $this->__autoload($view);
+        $this->__autoload('app\\view\\'.$view);
     }
     
     public function loadClass($class, $args = false)

@@ -1,4 +1,5 @@
 <?php
+namespace app;
 //  $__cname = lcfirst(basename(__FILE__, '.php'));
 //  foreach(View::$vars[$__cname] as $key=>$value){
 //      $$key = $value;
@@ -15,7 +16,7 @@
         </BUTTON>
         <DIV class="collapse navbar-collapse" id="collapsibleNavbar">
             <UL class="navbar-nav">
-                <LI class="nav-item"><A class="nav-link" href="<?php print BASE_URL?>">Főoldal</A></LI>
+                <LI class="nav-item"><A class="nav-link" href="<?php print BASE_URL?>">Listázás</A></LI>
             </UL>
         </DIV>
     </NAV>

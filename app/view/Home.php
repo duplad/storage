@@ -1,8 +1,13 @@
 <?php
-//  $__cname = lcfirst(basename(__FILE__, '.php'));
-//  foreach(View::$vars[$__cname] as $key=>$value){
-//      $$key = $value;
-//  }
+namespace app\view;
 
+use app\core as core;
 
-    print "<H1>Hello World!</H1>";
+$__cname = lcfirst(basename(__FILE__, '.php'));
+foreach (core\View::$vars[$__cname] as $key => $value) {
+    $$key = $value;
+}
+
+print "<H1>Hello World!</H1>";
+
+print_r($storageList);
