@@ -36,7 +36,7 @@ if (isset($_SERVER['PATH_INFO'])) {
 try {
     $contr = "app\\controller\\$contr";
     $controller = new $contr();
+    $controller->$method($args);
 } catch (\Exception $e) {
     echo $e->getMessage(), "\n";
 }
-$controller->$method($args);
