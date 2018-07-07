@@ -21,6 +21,64 @@ class StorageList
         return $nextId;
     }
 
+    private function getStorageByCapacity($amount)
+    {
+        $respond = [];
+        $left = $amount;
+        for ($i=0; $i < count($this->storages) && $left; $i++) { 
+            $storage = $this->storages[$i];
+            $capacity = $storage->getCurrentCapacity();
+            if ($capacity >= $left) {
+                $respond[] = [
+                    'storageIndex' => $i,
+                    'amount' => $left
+                ];
+                $left = 0;
+            } elseif($capacity > 0) {
+                $respond[] = [
+                    'storageIndex' => $i,
+                    'amount' => $capacity
+                ];
+                $left -= $capacity;
+            }
+        }
+        if ($left > 0) {
+            throw new \Exception("Not enought storage space!", 1);
+            return false;
+        } else {
+            return $respond;
+        }
+    }
+
+    private function getStorageByItemId($id, $amount)
+    {
+        $respond = [];
+        $left = $amount;
+        for ($i=0; $i < count($this->storages) && $left; $i++) { 
+            $storage = $this->storages[$i];
+            $load = $storage->getItemById($id);
+            if ($load >= $left) {
+                $respond[] = [
+                    'storageIndex' => $i,
+                    'amount' => $left
+                ];
+                $left = 0;
+            } elseif($load > 0) {
+                $respond[] = [
+                    'storageIndex' => $i,
+                    'amount' => $load
+                ];
+                $left -= $load;
+            }
+        }
+        if ($left > 0) {
+            throw new \Exception("Not enought item!", 1);
+            return false;
+        } else {
+            return $respond;
+        }
+    }
+
     //public
     public function isExist($id)
     {
@@ -44,6 +102,38 @@ class StorageList
         $storage = new Storage($id, $name, $addr, $capacity);
         $this->storages[] = $storage;
         $this->totalCapacity += $capacity;
+        return true;
+    }
+
+    public function addProduct($id, $name, $price, $brand, $amount = 1)
+    {
+        try{
+            $storages = $this->getStorageByCapacity($amount);
+        } catch (\Exception $e) {
+            echo $e->getMessage(), "\n";
+            return false;
+        }
+        for ($i=0; $i < count($storages); $i++) { 
+            $index = $storages[$i]['storageIndex'];
+            $this->storages[$index]->addProduct($id, $name, $price, $brand, $storages[$i]['amount']);
+            $this->totalCapacity -= $storages[$i]['amount'];
+        }
+        return true;
+    }
+
+    public function remProductById($id, $amount = 1)
+    {
+        try{
+            $storages = $this->getStorageByItemId($id, $amount);
+        } catch (\Exception $e) {
+            echo $e->getMessage(), "\n";
+            return false;
+        }
+        for ($i=0; $i < count($storages); $i++) { 
+            $index = $storages[$i]['storageIndex'];
+            $this->storages[$index]->remProduct($id, $storages[$i]['amount']);
+            $this->totalCapacity += $storages[$i]['amount'];
+        }
         return true;
     }
 

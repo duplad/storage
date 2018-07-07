@@ -4,7 +4,7 @@ namespace app\library;
 class ProductList
 {
     //Private
-    private $list;
+    private $list = [];
 
     private function getListItemByIndex($index)
     {
@@ -14,7 +14,11 @@ class ProductList
     //Public
     public function getCurrentLoad()
     {
-        return count($list);
+        $load = 0;
+        for ($i=0; $i < count($this->list); $i++) { 
+            $load += $this->list[$i]->getQuantity();
+        }
+        return $load;
     }
 
     public function findIndexById($id)
@@ -62,7 +66,7 @@ class ProductList
         if ($listItem = $this->getListItemById($product->getId())) {
             $listItem->incQuantity($amount);
         } else {
-            $newItem = new \storage\ListItem($product, $amount);
+            $newItem = new ListItem($product, $amount);
             $this->list[] = $newItem;
         }
     }
@@ -70,29 +74,29 @@ class ProductList
     public function takeItemById($id, $amount = 1)
     {
         $index = $this->findIndexById($id);
-        if ($index < -1) {
+        if ($index > -1) {
             $listItem = $this->getListItemByIndex($index);
             $remain = $listItem->getQuantity() - $amount;
             if ($remain < 0) {
-                throw new Exception("Not enought item to take", 1);
+                throw new \Exception("Not enought item to take", 1);
                 return false;
             } else {
                 $listItem->decQuantity($amount);
                 return true;
             }
         } else {
-            throw new Exception("Item not found", 1);
+            throw new \Exception("Item not found", 1);
             return false;
         }
     }
     public function deleteItemById($id)
     {
         $index = $this->findIndexById($id);
-        if ($index < -1) {
+        if ($index > -1) {
             array_splice($this->list, $index, 1);
             return true;
         } else {
-            throw new Exception("Item not found", 1);
+            throw new \Exception("Item not found", 1);
             return false;
         }
     }

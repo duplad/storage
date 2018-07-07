@@ -18,13 +18,38 @@ class Storage
         $this->productList = new ProductList();
     }
 
+    public function getCurrentLoad(){
+        return $this->productList->getCurrentLoad();
+    }
+
+    public function getCurrentCapacity(){
+        $load = $this->productList->getCurrentLoad();
+        $capacity = $this->getCapacity();
+        return $capacity - $load;
+    }
+
     public function addProduct($id, $name, $price, $brand, $amount = 1)
     {
-        if (($this->productList->getCurrentLoad() + $amount) < $this->capacity) {
+        if (($this->getCurrentLoad() + $amount) <= $this->capacity) {
             $product = new Product($id, $name, $price, $brand);
             $this->productList->addProduct($product, $amount);
+            return true;
         } else {
-            throw new Exception("Not enought storage space!", 1);
+            return false;
+        }
+    }
+
+    public function remProduct($id, $amount)
+    {
+        $this->productList->takeItemById($id, $amount);
+    }
+
+    public function getItemById($id)
+    {
+        if ($item = $this->productList->getListItemById($id)) {
+            return $item->getQuantity();
+        } else {
+            return false;
         }
     }
 
