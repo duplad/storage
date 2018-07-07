@@ -7,7 +7,7 @@ function __autoload($name)
         __ROOT__."/app/controller/$name.php",
         __ROOT__."/app/model/$name.php",
         __ROOT__."/app/view/$name.php",
-        __ROOT__."/app/class/$name.php"
+        __ROOT__."/app/custom/$name.php"
     ];
 
     $stop = false;
