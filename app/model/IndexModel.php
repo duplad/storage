@@ -1,6 +1,9 @@
 <?php
+namespace app\model;
 
-class IndexModel extends Model
+use app\core as core;
+
+class IndexModel extends core\Model
 {
 
 }

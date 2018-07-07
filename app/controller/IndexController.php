@@ -1,6 +1,9 @@
 <?php
+namespace app\controller;
 
-class IndexController extends Controller
+use app\core as core;
+
+class IndexController extends core\Controller
 {
 
     public function index($args = false)

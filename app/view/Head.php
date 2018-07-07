@@ -1,3 +1,7 @@
+<?php
+namespace app;
+
+?>
 <!doctype HTML>
 <HTML>
     <HEAD>

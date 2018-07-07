@@ -1,4 +1,6 @@
 <?php
+namespace app;
 
-define('__ROOT__', __DIR__);
-include_once __ROOT__."/config/autoload.php";
+include_once "app/config/config.php";
+include_once "app/config/autoload.php";
+include_once "app/config/route.php";

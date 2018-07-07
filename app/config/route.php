@@ -1,4 +1,5 @@
 <?php
+namespace app;
 
 if (isset($_REQUEST)) {
     $args = $_REQUEST;
@@ -32,5 +33,10 @@ if (isset($_SERVER['PATH_INFO'])) {
     $method = 'index';
 }
 
-$controller = new $contr();
+try {
+    $contr = "app\\controller\\$contr";
+    $controller = new $contr();
+} catch (\Exception $e) {
+    echo $e->getMessage(), "\n";
+}
 $controller->$method($args);

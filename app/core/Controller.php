@@ -1,4 +1,5 @@
 <?php
+namespace app\core;
 
 class Controller
 {
@@ -19,13 +20,13 @@ class Controller
                 if (is_readable($inc)) {
                     include_once $inc;
                 } else {
-                    throw new Exception("$name.php file does not readable.");
+                    throw new \Exception("$name.php file does not readable.");
                 }
             }
         }
         
         if (!$stop) {
-            throw new Exception("$name.php file does not exists.");
+            throw new \Exception("$name.php file does not exists.");
         }
     }
     
