@@ -1,9 +1,16 @@
 <?php
 namespace app;
-//  $__cname = lcfirst(basename(__FILE__, '.php'));
-//  foreach(View::$vars[$__cname] as $key=>$value){
-//      $$key = $value;
-//  }
+
+use app\core as core;
+
+$__cname = lcfirst(basename(__FILE__, '.php'));
+if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
+    $data = core\View::$vars[$__cname];
+    foreach ($data as $key => $value) {
+        $$key = $value;
+    }
+}
+
 ?>
     <DIV class="jumbotron text-center" style="margin-bottom:0">
         <H1>Képzeletbeli Termékek</H1>
@@ -15,8 +22,10 @@ namespace app;
         </BUTTON>
         <DIV class="collapse navbar-collapse" id="collapsibleNavbar">
             <UL class="navbar-nav">
-                <LI class="nav-item"><A class="nav-link" href="<?php print BASE_URL?>">Listázás</A></LI>
-                <LI class="nav-item"><A class="nav-link" href="<?php print BASE_URL?>">Új Raktár</A></LI>
+                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 1) { print "active"; }?>" href="<?php print BASE_URL?>">Raktárak</A></LI>
+                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 2) { print "active"; }?>" href="<?php print BASE_URL?>index/newstorage">Raktár Hozzáadása</A></LI>
+                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 3) { print "active"; }?>" href="<?php print BASE_URL?>">Termékek</A></LI>
+                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 4) { print "active"; }?>" href="<?php print BASE_URL?>">Termék Hozzáadása</A></LI>
             </UL>
         </DIV>
     </NAV>

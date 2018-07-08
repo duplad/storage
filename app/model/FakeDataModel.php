@@ -26,7 +26,8 @@ class FakeDataModel extends core\Model
     }
 
     //public
-    public function loadFakeData(){
+    public function loadFakeData()
+    {
         if (!isset($_SESSION) || !isset($_SESSION['fakeData'])) {
             include_once __ROOT__.DIRECTORY_SEPARATOR."app/library/FakeData.php";
         }
