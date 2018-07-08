@@ -1,31 +1,69 @@
 <?php
 namespace app\library;
 
-$dell = new Brand('Dell', '5*');
-$acer = new Brand('Acer', '5*');
-$lenovo = new Brand('Lenovo', '4*');
-$samsung = new Brand('Samsung', '4*');
-$fujitsu = new Brand('Fujitsu', '3*');
-$hp = new Brand('HP', '2*');
+//brands
+$brands = [];
+$brands[] = [
+    'name' => 'Dell',
+    'category' => '5*'
+];
+$brands[] = [
+    'name' => 'Acer',
+    'category' => '5*'
+];
+$brands[] = [
+    'name' => 'Lenovo',
+    'category' => '4*'
+];
+$brands[] = [
+    'name' => 'Samsung',
+    'category' => '4*'
+];
+$brands[] = [
+    'name' => 'Fujitsu',
+    'category' => '3*'
+];
+$brands[] = [
+    'name' => 'HP',
+    'category' => '2*'
+];
 
-$storageList = new StorageList();
-$storageList->addStorage('Budapest', 'Budapest, Bécsi út', 10);
-$storageList->addStorage('Békéscsaba', 'Békéscsaba, Tavasz utca', 5);
+//storages
+$storages = [];
+$storages[] = [
+    'name' => 'Pesti Raktár',
+    'addr' => 'Budapest, Bécsi út',
+    'capacity' => 10
+];
+$storages[] = [
+    'name' => 'Békéscsabai Raktár',
+    'addr' => 'Békéscsaba, Tavasz utca',
+    'capacity' => 5
+];
 
-$storageList->addProduct(1, 'Laptop', '80000', $acer, 5);
-$storageList->addProduct(2, 'Monitor', '25000', $samsung, 10);
-// $storageList->addProduct(2, 'Monitor', '25000', $samsung, 5);
-// $storageList->remProductById(1, 5);
-// $storageList->remProductById(2, 10);
+//products
+$products = [];
+$products[] = [
+    'id' => 1,
+    'name' => 'Personal Computer',
+    'price' => 120000,
+    'brand' => 'Acer',
+    'amount' => 3,
+    'typeId' => 1,
+    'osType' => 'KDE Neon'
+];
+$products[] = [
+    'id' => 2,
+    'name' => 'Monitor',
+    'price' => 80000,
+    'brand' => 'Samsung',
+    'amount' => 8,
+    'typeId' => 1,
+    'screenType' => 'AMOLED'
+];
 
 $fakeData = [];
-$fakeData['brands'] = [
-    'dell' => $dell,
-    'acer' => $acer,
-    'lenovo' => $lenovo,
-    'samsung' => $samsung,
-    'fujitsu' => $fujitsu,
-    'hp' => $hp
-];
-$fakeData['storageList'] = $storageList;
+$fakeData['brands'] = $brands;
+$fakeData['storages'] = $storages;
+$fakeData['products'] = $products;
 $_SESSION['fakeData'] = $fakeData;

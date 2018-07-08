@@ -28,10 +28,9 @@ class Storage
         return $capacity - $load;
     }
 
-    public function addProduct($id, $name, $price, $brand, $amount = 1)
+    public function addProduct($product, $amount = 1)
     {
         if (($this->getCurrentLoad() + $amount) <= $this->capacity) {
-            $product = new Product($id, $name, $price, $brand);
             $this->productList->addProduct($product, $amount);
             return true;
         } else {

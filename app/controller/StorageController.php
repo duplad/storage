@@ -11,12 +11,12 @@ class StorageController extends core\Controller
         $this->loadView('head');
         $this->loadView('menu');
 
-        $this->loadModel('app\\model\\indexModel');
-        $data = $this->indexModel->getFakeData();
-
+        $this->loadModel('app\\model\\fakeDataModel');
+        $this->fakeDataModel->loadFakeData();
         if($args && isset($args['url']) && isset($args['url'][0])){
-			$data['id'] = $args['url'][0];
-			$this->loadView('storage', $data);
+            $id = $args['url'][0];
+            $storage = $this->fakeDataModel->getStorageById($id);
+			$this->loadView('storage', $storage);
         }
 
         $this->loadView('foot');

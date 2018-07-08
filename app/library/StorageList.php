@@ -25,7 +25,7 @@ class StorageList
     {
         $respond = [];
         $left = $amount;
-        for ($i=0; $i < count($this->storages) && $left; $i++) { 
+        for ($i=0; $i < count($this->storages) && $left; $i++) {
             $storage = $this->storages[$i];
             $capacity = $storage->getCurrentCapacity();
             if ($capacity >= $left) {
@@ -115,7 +115,7 @@ class StorageList
         return $this->storages[$find];
     }
 
-    public function addProduct($id, $name, $price, $brand, $amount = 1)
+    public function addProduct($product, $amount = 1)
     {
         try{
             $storages = $this->getStorageByCapacity($amount);
@@ -125,7 +125,7 @@ class StorageList
         }
         for ($i=0; $i < count($storages); $i++) { 
             $index = $storages[$i]['storageIndex'];
-            $this->storages[$index]->addProduct($id, $name, $price, $brand, $storages[$i]['amount']);
+            $this->storages[$index]->addProduct($product, $storages[$i]['amount']);
             $this->totalCapacity -= $storages[$i]['amount'];
         }
         return true;

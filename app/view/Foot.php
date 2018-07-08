@@ -1,3 +1,7 @@
+<?php
+namespace app;
+
+?>
         </DIV>
         </DIV>
         <DIV class="small text-center footer" style="margin-bottom:0">

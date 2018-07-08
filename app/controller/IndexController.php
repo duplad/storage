@@ -11,10 +11,11 @@ class IndexController extends core\Controller
         $this->loadView('head');
         $this->loadView('menu');
 
-        $this->loadModel('app\\model\\indexModel');
-        $data = $this->indexModel->getFakeData();
+        $this->loadModel('app\\model\\fakeDataModel');
+        $this->fakeDataModel->loadFakeData();
+        $storageList = $this->fakeDataModel->getStorageList();
 
-        $this->loadView('home', $data);
+        $this->loadView('home', $storageList);
         $this->loadView('foot');
     }
 }
