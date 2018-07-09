@@ -13,6 +13,9 @@ class IndexController extends core\Controller
 
         $this->loadModel('app\\model\\fakeDataModel');
         $this->fakeDataModel->loadFakeData();
+        if ($args && $args['newStorage']) {
+            $this->fakeDataModel->addStorage($args);
+        }
         $storageList = $this->fakeDataModel->getStorageList();
 
         $this->loadView('home', $storageList);

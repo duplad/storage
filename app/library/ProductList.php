@@ -101,6 +101,11 @@ class ProductList
         }
     }
 
+    public function getProducts()
+    {
+        return $this->list;
+    }
+
     public function __toString()
     {
         $respond = '';

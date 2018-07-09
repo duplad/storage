@@ -16,7 +16,7 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
 <H1>Raktár Hozzáadása</H1>
 
 <div class="form-div">
-    <form action="<?php print app\BASE_URL;?>" method="post" name="newStorage">
+    <form action="<?php print app\BASE_URL;?>" method="post">
         <div class="form-group">
             <label for="name">Név:</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -31,6 +31,6 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
             <label for="capacity">Kapacitás:</label>
             <input type="number" class="form-control" id="capacity" name="capacity">
         </div>
-        <input type="submit" name="submit" id="submit" class="btn btn-info" value="Rögzítés">
+        <input type="submit" name="newStorage" id="newStorage_submit" class="btn btn-info" value="Rögzítés">
     </form>
 </div>

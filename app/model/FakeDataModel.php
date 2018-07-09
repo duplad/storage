@@ -26,11 +26,16 @@ class FakeDataModel extends core\Model
     }
 
     //public
-    public function loadFakeData()
+
+    public function __construct()
     {
         if (!isset($_SESSION) || !isset($_SESSION['fakeData'])) {
             include_once __ROOT__.DIRECTORY_SEPARATOR."app/library/FakeData.php";
         }
+    }
+
+    public function loadFakeData()
+    {
         $storageList = new library\StorageList();
         $fakeData = $_SESSION['fakeData'];
         //load brands
@@ -64,6 +69,43 @@ class FakeDataModel extends core\Model
         $this->storageList = $storageList;
     }
 
+    public function addStorage($args)
+    {
+        $this->storageList->addStorage($args['name'], $args['addr'], $args['capacity']);
+        $_SESSION['fakeData']['storages'][] = [
+            'name' => $args['name'],
+            'addr' => $args['addr'],
+            'capacity' => $args['capacity']
+        ];
+    }
+
+    public function addProductById($id, $amount=1)
+    {
+        $products = $_SESSION['fakeData']['products'];
+        for ($i=0; $i < count($products); $i++) { 
+            if ($products[$i]['id'] == $id) {
+                if ($currBrand = $this->getBrandByName($products[$i]['brand'])) {
+                    $product = new library\Product($products[$i]['id'], $products[$i]['name'], $products[$i]['price'], $currBrand);
+                    if ($this->storageList->addProduct($product, $amount)){
+                        $_SESSION['fakeData']['products'][$i]['amount'] += $amount;
+                    }
+                }
+            }
+        }
+    }
+
+    public function remProductById($id, $amount=1)
+    {
+        if ($this->storageList->remProductById($id, $amount)) {
+            $products = $_SESSION['fakeData']['products'];
+            for ($i=0; $i < count($products); $i++) { 
+                if ($products[$i]['id'] == $id) {
+                    $_SESSION['fakeData']['products'][$i]['amount'] -= $amount;
+                }
+            }
+        }
+    }
+
     public function getStorageList()
     {
         return ['storageList' => $this->storageList];
@@ -73,5 +115,10 @@ class FakeDataModel extends core\Model
     {
         $storage = $this->storageList->getStorageByid($id);
         return ['storage' => $storage];
+    }
+
+    public function getProductList()
+    {
+        return $this->storageList->getProductList();
     }
 }

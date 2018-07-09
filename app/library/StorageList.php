@@ -7,6 +7,7 @@ class StorageList
     //private
     private $storages = [];
     private $totalCapacity = 0;
+    private $productList;
 
     private function getNextId()
     {
@@ -80,6 +81,12 @@ class StorageList
     }
 
     //public
+
+    public function __construct()
+    {
+        $this->productList = new ProductList();
+    }
+
     public function isExist($id)
     {
         $find = false;
@@ -105,7 +112,8 @@ class StorageList
         return true;
     }
 
-    public function getStorageById($id){
+    public function getStorageById($id)
+    {
         $find = -1;
         for ($i=0; $i < count($this->storages) && $find == -1; $i++) {
             if ($this->storages[$i]->getId() == $id) {
@@ -128,6 +136,7 @@ class StorageList
             $this->storages[$index]->addProduct($product, $storages[$i]['amount']);
             $this->totalCapacity -= $storages[$i]['amount'];
         }
+        $this->productList->addProduct($product, $amount);
         return true;
     }
 
@@ -144,7 +153,13 @@ class StorageList
             $this->storages[$index]->remProduct($id, $storages[$i]['amount']);
             $this->totalCapacity += $storages[$i]['amount'];
         }
+        $this->productList->takeItemById($id, $amount);
         return true;
+    }
+
+    public function getProductList()
+    {
+        return $this->productList;
     }
 
     public function __toString()
