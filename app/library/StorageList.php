@@ -128,7 +128,7 @@ class StorageList
         try{
             $storages = $this->getStorageByCapacity($amount);
         } catch (\Exception $e) {
-            echo $e->getMessage(), "\n";
+            echo "<div class=\"alert alert-danger alert-dismissible\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
             return false;
         }
         for ($i=0; $i < count($storages); $i++) { 
@@ -145,7 +145,7 @@ class StorageList
         try{
             $storages = $this->getStorageByItemId($id, $amount);
         } catch (\Exception $e) {
-            echo $e->getMessage(), "\n";
+            echo "<div class=\"alert alert-danger alert-dismissible\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
             return false;
         }
         for ($i=0; $i < count($storages); $i++) { 
