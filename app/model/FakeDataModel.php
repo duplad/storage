@@ -103,20 +103,21 @@ class FakeDataModel extends core\Model
 
     public function addNewProduct($args) //$id, $name, $price, $brand, $p
     {
-        if (isset($_SESSION) && isset($_SESSION['fakeData']) && isset($_SESSION['fakeData']['products'])) {
-            $_SESSION['fakeData']['products'][] = $args;
-        } elseif(isset($_SESSION) && isset($_SESSION['fakeData'])) {
-            $_SESSION['fakeData']['products'] = [];
-            $_SESSION['fakeData']['products'][] = $args;
-        } else {
-            $_SESSION['fakeData'] = [];
-            $_SESSION['fakeData']['products'] = [];
-            $_SESSION['fakeData']['products'][] = $args;
-        }
         $currBrand = $this->getBrandByName($args['brand']);
         $type = "app\\library\\".$args['type'];
         $p = new $type($args['id'], $args['name'], $args['price'], $currBrand, $args['p']);
-        $this->storageList->addProduct($p, $args['amount']);
+        if ($this->storageList->addProduct($p, $args['amount'])) {
+            if (isset($_SESSION) && isset($_SESSION['fakeData']) && isset($_SESSION['fakeData']['products'])) {
+                $_SESSION['fakeData']['products'][] = $args;
+            } elseif(isset($_SESSION) && isset($_SESSION['fakeData'])) {
+                $_SESSION['fakeData']['products'] = [];
+                $_SESSION['fakeData']['products'][] = $args;
+            } else {
+                $_SESSION['fakeData'] = [];
+                $_SESSION['fakeData']['products'] = [];
+                $_SESSION['fakeData']['products'][] = $args;
+            }
+        }
 }
 
     public function addProductById($id, $amount=1)
