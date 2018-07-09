@@ -25,7 +25,6 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
                 <LI class="nav-item"><A class="nav-link <?php if ($menuId == 1) { print "active"; }?>" href="<?php print BASE_URL?>">Raktárak</A></LI>
                 <LI class="nav-item"><A class="nav-link <?php if ($menuId == 2) { print "active"; }?>" href="<?php print BASE_URL?>index/newstorage">Raktár Hozzáadása</A></LI>
                 <LI class="nav-item"><A class="nav-link <?php if ($menuId == 3) { print "active"; }?>" href="<?php print BASE_URL?>product">Termékek</A></LI>
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 4) { print "active"; }?>" href="<?php print BASE_URL?>product/newproduct">Termék Hozzáadása</A></LI>
             </UL>
         </DIV>
     </NAV>

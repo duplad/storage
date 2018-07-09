@@ -49,8 +49,8 @@ $products[] = [
     'price' => 120000,
     'brand' => 'Acer',
     'amount' => 3,
-    'typeId' => 1,
-    'osType' => 'KDE Neon'
+    'type' => 'Pc',
+    'p' => 'KDE Neon'
 ];
 $products[] = [
     'id' => 2,
@@ -58,8 +58,8 @@ $products[] = [
     'price' => 80000,
     'brand' => 'Samsung',
     'amount' => 8,
-    'typeId' => 1,
-    'screenType' => 'AMOLED'
+    'type' => 'Display',
+    'p' => 'AMOLED'
 ];
 
 $fakeData = [];

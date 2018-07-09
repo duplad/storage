@@ -17,11 +17,6 @@ class ProductController extends core\Controller
         $this->loadView('menu', ['menuId' => 3]);
 
         $productList = $this->fakeDataModel->getProductList();
-        // if($args && isset($args['url']) && isset($args['url'][0])){
-        //     $id = $args['url'][0];
-        //     $storage = $this->fakeDataModel->getStorageById($id);
-		// 	$this->loadView('storage', $storage);
-        // }
         $this->loadView('product', ['productList' => $productList]);
         $this->loadView('foot');
     }
@@ -40,21 +35,5 @@ class ProductController extends core\Controller
             $this->fakeDataModel->addProductById($id);
         }
         $this->index();
-    }
-
-    public function newproduct($args = false)
-    {
-        $this->loadView('head');
-        $this->loadView('menu', ['menuId' => 3]);
-
-        $this->loadModel('app\\model\\fakeDataModel');
-        $this->fakeDataModel->loadFakeData();
-        // if($args && isset($args['url']) && isset($args['url'][0])){
-        //     $id = $args['url'][0];
-        //     $storage = $this->fakeDataModel->getStorageById($id);
-		// 	$this->loadView('storage', $storage);
-        // }
-        $this->loadView('product', [1 => '1']);
-        $this->loadView('foot');
     }
 }
