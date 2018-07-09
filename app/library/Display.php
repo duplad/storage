@@ -10,9 +10,4 @@ class Display extends Product
         parent::__construct($id, $name, $price, $brand);
         $this->screenType = $screenType;
     }
-
-    public function __toString()
-    {
-        return var_dump($this);
-    }
 }

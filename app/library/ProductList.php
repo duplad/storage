@@ -106,13 +106,18 @@ class ProductList
         return $this->list;
     }
 
-    public function __toString()
+    public function getHtml()
     {
         $respond = '';
         for ($i=0; $i < count($this->list); $i++) { 
             $item = $this->list[$i];
-            $respond .= $item;
+            $respond .= $item->getHtml();
         }
         return $respond;
+    }
+
+    public function __toString()
+    {
+        return json_encode($this);
     }
 }

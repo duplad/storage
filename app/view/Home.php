@@ -13,4 +13,4 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
 
 print "<H1>Raktárak</H1>";
 
-print $storageList;
+print $storageList->getHtml();

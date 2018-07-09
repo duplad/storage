@@ -42,11 +42,16 @@ class ListItem
         return $this;
     }
 
-    public function __toString()
+    public function getHtml()
     {
         $respond = '<div class="product">';
         $respond .= 'Termék: '.$this->product->getName().' Mennyiség: '.$this->getQuantity();
         $respond .= '</div>';
         return $respond;
+    }
+
+    public function __toString()
+    {
+        return json_encode($this);
     }
 }

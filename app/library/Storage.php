@@ -90,15 +90,15 @@ class Storage
         return $this;
     }
 
-    public function getProducts()
+    public function getProductHtml()
     {
         $respond = '<div class="row"><div class="col">';
-        $respond .= $this->productList;
+        $respond .= $this->productList->getHtml();
         $respond .= '</div></div>';
         return $respond;
     }
 
-    public function __toString()
+    public function getHtml()
     {
         $respond = '<div class="storage-head">Név: </div>';
         $respond .= '<div class="storage-val">'.$this->getName().'</div>';
@@ -111,5 +111,10 @@ class Storage
         $respond .= '<div class="storage-btn"><a class="" href="storage/index/'.$this->getId().'">Készlet</a></div>';
 
         return $respond;
+    }
+
+    public function __toString()
+    {
+        return json_encode($this);
     }
 }

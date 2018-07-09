@@ -162,14 +162,19 @@ class StorageList
         return $this->productList;
     }
 
-    public function __toString()
+    public function getStorages()
+    {
+        return $this->storages;
+    }
+
+    public function getHtml()
     {
         $respond = '';
         for ($i=0; $i < count($this->storages); $i++) {
             if($i % 3 == 0){
 				$respond .= "<div class=\"row\">";
 			} 
-            $respond .= "<div class=\"storage col-sm-4\">".$this->storages[$i]."</div>";
+            $respond .= "<div class=\"storage col-sm-4\">".$this->storages[$i]->getHtml()."</div>";
             if ($i % 3 == 2) {
 				$respond .= "</div>";
 			}
@@ -178,5 +183,10 @@ class StorageList
 			$respond .= "</div>";
         }
         return $respond;
+    }
+
+    public function __toString()
+    {
+        return json_encode($this);
     }
 }

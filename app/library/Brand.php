@@ -36,6 +36,6 @@ class Brand
 
     public function __toString()
     {
-        return var_dump($this);
+        return json_encode($this);
     }
 }

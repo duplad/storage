@@ -34,7 +34,7 @@ for ($i=0; $i < count($list); $i++) {
     print "</div>";
 
     if ($i % 3 == 2) {
-        $respond .= "</div>";
+        print "</div>";
     }
 }
 if($i % 3 != 0){

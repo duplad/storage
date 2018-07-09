@@ -12,4 +12,4 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
 }
 
 print "<h1>".$storage->getName()."</h1>";
-print $storage->getProducts();
+print $storage->getProductHtml();
