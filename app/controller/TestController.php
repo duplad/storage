@@ -15,7 +15,8 @@ class TestController extends core\Controller
         $this->addBrand();
     }
 
-    public function addTwoStorage(){
+    public function addTwoStorage()
+    {
         $storages[] = [
             'name' => 'Pesti Raktár',
             'addr' => 'Budapest, Bécsi út',

@@ -19,9 +19,9 @@ $list = $productList->getProducts();
 for ($i=0; $i < count($list); $i++) {
     $product = $list[$i]->getProduct();
     $quantity = $list[$i]->getQuantity();
-    if($i % 3 == 0){
+    if ($i % 3 == 0) {
         print "<div class=\"row\">";
-    } 
+    }
 
     print "<div class=\"storage col-sm-4\">";
     print '<div class="storage-head">Név: </div>';
@@ -37,6 +37,6 @@ for ($i=0; $i < count($list); $i++) {
         print "</div>";
     }
 }
-if($i % 3 != 0){
+if ($i % 3 != 0) {
     print "</div>";
 }

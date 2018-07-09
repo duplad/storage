@@ -15,7 +15,7 @@ class ProductList
     public function getCurrentLoad()
     {
         $load = 0;
-        for ($i=0; $i < count($this->list); $i++) { 
+        for ($i=0; $i < count($this->list); $i++) {
             $load += $this->list[$i]->getQuantity();
         }
         return $load;
@@ -109,7 +109,7 @@ class ProductList
     public function getHtml()
     {
         $respond = '';
-        for ($i=0; $i < count($this->list); $i++) { 
+        for ($i=0; $i < count($this->list); $i++) {
             $item = $this->list[$i];
             $respond .= $item->getHtml();
         }

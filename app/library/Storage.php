@@ -20,11 +20,13 @@ class Storage
         $this->productList = new ProductList();
     }
 
-    public function getCurrentLoad(){
+    public function getCurrentLoad()
+    {
         return $this->productList->getCurrentLoad();
     }
 
-    public function getCurrentCapacity(){
+    public function getCurrentCapacity()
+    {
         $load = $this->productList->getCurrentLoad();
         $capacity = $this->getCapacity();
         return $capacity - $load;
@@ -110,7 +112,9 @@ class Storage
         $respond .= '<div class="storage-val">'.$this->getCapacity().'</div>';
         $respond .= '<div class="storage-head">Foglalt: </div>';
         $respond .= '<div class="storage-val">'.$this->getCurrentLoad().'</div>';
-        $respond .= '<div class="storage-btn"><a class="" href="'.app\BASE_URL.'storage/index/'.$this->getId().'">Készlet</a></div>';
+        $respond .= '<div class="storage-btn">';
+        $respond .= '<a class="" href="'.app\BASE_URL.'storage/index/'.$this->getId().'">Készlet</a>';
+        $respond .= '</div>';
 
         return $respond;
     }

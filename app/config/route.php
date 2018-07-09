@@ -38,5 +38,6 @@ try {
     $controller = new $contr();
     $controller->$method($args);
 } catch (\Exception $e) {
-    echo "<div class=\"alert alert-danger alert-dismissible\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
+    echo "<div class=\"alert alert-danger alert-dismissible\">".
+        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
 }

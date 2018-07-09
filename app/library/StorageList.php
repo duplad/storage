@@ -35,7 +35,7 @@ class StorageList
                     'amount' => $left
                 ];
                 $left = 0;
-            } elseif($capacity > 0) {
+            } elseif ($capacity > 0) {
                 $respond[] = [
                     'storageIndex' => $i,
                     'amount' => $capacity
@@ -55,7 +55,7 @@ class StorageList
     {
         $respond = [];
         $left = $amount;
-        for ($i=0; $i < count($this->storages) && $left; $i++) { 
+        for ($i=0; $i < count($this->storages) && $left; $i++) {
             $storage = $this->storages[$i];
             $load = $storage->getItemById($id);
             if ($load >= $left) {
@@ -64,7 +64,7 @@ class StorageList
                     'amount' => $left
                 ];
                 $left = 0;
-            } elseif($load > 0) {
+            } elseif ($load > 0) {
                 $respond[] = [
                     'storageIndex' => $i,
                     'amount' => $load
@@ -125,13 +125,14 @@ class StorageList
 
     public function addProduct($product, $amount = 1)
     {
-        try{
+        try {
             $storages = $this->getStorageByCapacity($amount);
         } catch (\Exception $e) {
-            echo "<div class=\"alert alert-danger alert-dismissible\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
+            echo "<div class=\"alert alert-danger alert-dismissible\">".
+            "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
             return false;
         }
-        for ($i=0; $i < count($storages); $i++) { 
+        for ($i=0; $i < count($storages); $i++) {
             $index = $storages[$i]['storageIndex'];
             $this->storages[$index]->addProduct($product, $storages[$i]['amount']);
             $this->totalCapacity -= $storages[$i]['amount'];
@@ -142,13 +143,14 @@ class StorageList
 
     public function remProductById($id, $amount = 1)
     {
-        try{
+        try {
             $storages = $this->getStorageByItemId($id, $amount);
         } catch (\Exception $e) {
-            echo "<div class=\"alert alert-danger alert-dismissible\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
+            echo "<div class=\"alert alert-danger alert-dismissible\">".
+            "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>{$e->getMessage()}</div>";
             return false;
         }
-        for ($i=0; $i < count($storages); $i++) { 
+        for ($i=0; $i < count($storages); $i++) {
             $index = $storages[$i]['storageIndex'];
             $this->storages[$index]->remProduct($id, $storages[$i]['amount']);
             $this->totalCapacity += $storages[$i]['amount'];
@@ -171,16 +173,16 @@ class StorageList
     {
         $respond = '';
         for ($i=0; $i < count($this->storages); $i++) {
-            if($i % 3 == 0){
-				$respond .= "<div class=\"row\">";
-			} 
+            if ($i % 3 == 0) {
+                $respond .= "<div class=\"row\">";
+            }
             $respond .= "<div class=\"storage col-sm-4\">".$this->storages[$i]->getHtml()."</div>";
             if ($i % 3 == 2) {
-				$respond .= "</div>";
-			}
+                $respond .= "</div>";
+            }
         }
-        if($i % 3 != 0){
-			$respond .= "</div>";
+        if ($i % 3 != 0) {
+            $respond .= "</div>";
         }
         return $respond;
     }

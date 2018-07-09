@@ -13,7 +13,7 @@ class FakeDataModel extends core\Model
     private function getBrandByName($name)
     {
         $index = -1;
-        for ($i=0; $i < count($this->brands) && $index == -1; $i++) { 
+        for ($i=0; $i < count($this->brands) && $index == -1; $i++) {
             if ($this->brands[$i]->getName() == $name) {
                 $index = $i;
             }
@@ -46,7 +46,7 @@ class FakeDataModel extends core\Model
         $brands = [];
         if (isset($fakeData['brands'])) {
             for ($i=0; $i < count($fakeData['brands']); $i++) {
-                $brand = $fakeData['brands'][$i]; 
+                $brand = $fakeData['brands'][$i];
                 $brands[] = new library\Brand($brand['name'], $brand['category']);
             }
         }
@@ -56,14 +56,14 @@ class FakeDataModel extends core\Model
         if (isset($fakeData['storages'])) {
             for ($i=0; $i < count($fakeData['storages']); $i++) {
                 $storage = $fakeData['storages'][$i];
-                $storageList->addStorage($storage['name'], $storage['addr'], $storage['capacity']); 
+                $storageList->addStorage($storage['name'], $storage['addr'], $storage['capacity']);
             }
         }
         
         //load products
-        if (isset($fakeData['products'])){
+        if (isset($fakeData['products'])) {
             for ($i=0; $i < count($fakeData['products']); $i++) {
-                $product = $fakeData['products'][$i]; 
+                $product = $fakeData['products'][$i];
                 if ($currBrand = $this->getBrandByName($product['brand'])) {
                     $type = "app\\library\\".$product['type'];
                     $p = new $type($product['id'], $product['name'], $product['price'], $currBrand, $product['p']);
@@ -89,7 +89,7 @@ class FakeDataModel extends core\Model
     {
         if (isset($_SESSION) && isset($_SESSION['fakeData']) && isset($_SESSION['fakeData']['brands'])) {
             $_SESSION['fakeData']['brands'][] = $args;
-        } elseif(isset($_SESSION) && isset($_SESSION['fakeData'])) {
+        } elseif (isset($_SESSION) && isset($_SESSION['fakeData'])) {
             $_SESSION['fakeData']['brands'] = [];
             $_SESSION['fakeData']['brands'][] = $args;
         } else {
@@ -109,7 +109,7 @@ class FakeDataModel extends core\Model
         if ($this->storageList->addProduct($p, $args['amount'])) {
             if (isset($_SESSION) && isset($_SESSION['fakeData']) && isset($_SESSION['fakeData']['products'])) {
                 $_SESSION['fakeData']['products'][] = $args;
-            } elseif(isset($_SESSION) && isset($_SESSION['fakeData'])) {
+            } elseif (isset($_SESSION) && isset($_SESSION['fakeData'])) {
                 $_SESSION['fakeData']['products'] = [];
                 $_SESSION['fakeData']['products'][] = $args;
             } else {
@@ -118,17 +118,23 @@ class FakeDataModel extends core\Model
                 $_SESSION['fakeData']['products'][] = $args;
             }
         }
-}
+    }
 
-    public function addProductById($id, $amount=1)
+    public function addProductById($id, $amount = 1)
     {
         $products = $_SESSION['fakeData']['products'];
-        for ($i=0; $i < count($products); $i++) { 
+        for ($i=0; $i < count($products); $i++) {
             if ($products[$i]['id'] == $id) {
                 if ($currBrand = $this->getBrandByName($products[$i]['brand'])) {
                     $type = "app\\library\\".$products[$i]['type'];
-                    $product = new $type($products[$i]['id'], $products[$i]['name'], $products[$i]['price'], $currBrand, $products[$i]['p']);
-                    if ($this->storageList->addProduct($product, $amount)){
+                    $product = new $type(
+                        $products[$i]['id'],
+                        $products[$i]['name'],
+                        $products[$i]['price'],
+                        $currBrand,
+                        $products[$i]['p']
+                    );
+                    if ($this->storageList->addProduct($product, $amount)) {
                         $_SESSION['fakeData']['products'][$i]['amount'] += $amount;
                     }
                 }
@@ -136,11 +142,11 @@ class FakeDataModel extends core\Model
         }
     }
 
-    public function remProductById($id, $amount=1)
+    public function remProductById($id, $amount = 1)
     {
         if ($this->storageList->remProductById($id, $amount)) {
             $products = $_SESSION['fakeData']['products'];
-            for ($i=0; $i < count($products); $i++) { 
+            for ($i=0; $i < count($products); $i++) {
                 if ($products[$i]['id'] == $id) {
                     $_SESSION['fakeData']['products'][$i]['amount'] -= $amount;
                 }

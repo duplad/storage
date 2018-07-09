@@ -22,12 +22,48 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
         </BUTTON>
         <DIV class="collapse navbar-collapse" id="collapsibleNavbar">
             <UL class="navbar-nav">
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 1) { print "active"; }?>" href="<?php print BASE_URL?>">Raktárak</A></LI>
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 2) { print "active"; }?>" href="<?php print BASE_URL?>index/newstorage">Raktár Hozzáadása</A></LI>
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 3) { print "active"; }?>" href="<?php print BASE_URL?>product">Termékek</A></LI>
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 4) { print "active"; }?>" href="<?php print BASE_URL?>test/first">Első Teszt</A></LI>
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 5) { print "active"; }?>" href="<?php print BASE_URL?>test/second">Második Teszt</A></LI>
-                <LI class="nav-item"><A class="nav-link <?php if ($menuId == 6) { print "active"; }?>" href="<?php print BASE_URL?>test/third">Harmadik Teszt</A></LI>
+                <LI class="nav-item">
+                    <A class="nav-link 
+<?php if ($menuId == 1) {
+    print "active";
+}?>
+                    " href="<?php print BASE_URL?>">Raktárak</A>
+                </LI>
+                <LI class="nav-item">
+                    <A class="nav-link 
+<?php if ($menuId == 2) {
+    print "active";
+}?>
+                    " href="<?php print BASE_URL?>index/newstorage">Raktár Hozzáadása</A>
+                </LI>
+                <LI class="nav-item">
+                    <A class="nav-link 
+<?php if ($menuId == 3) {
+    print "active";
+}?>
+                    " href="<?php print BASE_URL?>product">Termékek</A>
+                </LI>
+                <LI class="nav-item">
+                    <A class="nav-link 
+<?php if ($menuId == 4) {
+    print "active";
+}?>
+                    " href="<?php print BASE_URL?>test/first">Első Teszt</A>
+                </LI>
+                <LI class="nav-item">
+                    <A class="nav-link 
+<?php if ($menuId == 5) {
+    print "active";
+}?>
+                    " href="<?php print BASE_URL?>test/second">Második Teszt</A>
+                </LI>
+                <LI class="nav-item">
+                    <A class="nav-link 
+<?php if ($menuId == 6) {
+    print "active";
+}?>
+                    " href="<?php print BASE_URL?>test/third">Harmadik Teszt</A>
+                </LI>
             </UL>
         </DIV>
     </NAV>
