@@ -2,6 +2,7 @@
 namespace app\view;
 
 use app\core as core;
+use app;
 
 $__cname = lcfirst(basename(__FILE__, '.php'));
 if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
@@ -15,21 +16,21 @@ if (isset(core\View::$vars[$__cname]) && core\View::$vars[$__cname]) {
 <H1>Raktár Hozzáadása</H1>
 
 <div class="form-div">
-    <form action="/" method="post" name="newStorage">
+    <form action="<?php print app\BASE_URL;?>" method="post" name="newStorage">
         <div class="form-group">
             <label for="name">Név:</label>
-            <input type="text" class="form-control" id="name">
+            <input type="text" class="form-control" id="name" name="name">
         </div>
     
         <div class="form-group">
             <label for="addr">Cím:</label>
-            <input type="text" class="form-control" id="addr">
+            <input type="text" class="form-control" id="addr" name="addr">
         </div>
 
         <div class="form-group">
             <label for="capacity">Kapacitás:</label>
-            <input type="number" class="form-control" id="capacity">
+            <input type="number" class="form-control" id="capacity" name="capacity">
         </div>
-        <input type="submit" class="btn btn-info" value="Rögzítés">
+        <input type="submit" name="submit" id="submit" class="btn btn-info" value="Rögzítés">
     </form>
 </div>
