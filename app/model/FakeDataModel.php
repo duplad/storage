@@ -86,8 +86,8 @@ class FakeDataModel extends core\Model
         for ($i=0; $i < count($products); $i++) { 
             if ($products[$i]['id'] == $id) {
                 if ($currBrand = $this->getBrandByName($products[$i]['brand'])) {
-                    $type = "library\\".$product['type'];
-                    $product = new $type($products[$i]['id'], $products[$i]['name'], $products[$i]['price'], $currBrand);
+                    $type = "app\\library\\".$products[$i]['type'];
+                    $product = new $type($products[$i]['id'], $products[$i]['name'], $products[$i]['price'], $currBrand, $products[$i]['p']);
                     if ($this->storageList->addProduct($product, $amount)){
                         $_SESSION['fakeData']['products'][$i]['amount'] += $amount;
                     }
