@@ -56,6 +56,6 @@ class Product
 
     public function __toString()
     {
-        return json_encode($this);
+        return serialize($this);
     }
 }

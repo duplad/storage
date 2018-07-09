@@ -48,4 +48,9 @@ class Controller
             $this->$class = new $class();
         }
     }
+
+    public function __toString()
+    {
+        return serialize($this);
+    }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace app\library;
 
+use app;
+
 class Storage
 {
     private $id;
@@ -108,13 +110,13 @@ class Storage
         $respond .= '<div class="storage-val">'.$this->getCapacity().'</div>';
         $respond .= '<div class="storage-head">Foglalt: </div>';
         $respond .= '<div class="storage-val">'.$this->getCurrentLoad().'</div>';
-        $respond .= '<div class="storage-btn"><a class="" href="storage/index/'.$this->getId().'">Készlet</a></div>';
+        $respond .= '<div class="storage-btn"><a class="" href="'.app\BASE_URL.'storage/index/'.$this->getId().'">Készlet</a></div>';
 
         return $respond;
     }
 
     public function __toString()
     {
-        return json_encode($this);
+        return serialize($this);
     }
 }

@@ -21,4 +21,9 @@ class Model
             throw new \Exception("$file file does not exists.");
         }
     }
+
+    public function __toString()
+    {
+        return serialize($this);
+    }
 }

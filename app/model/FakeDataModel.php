@@ -37,7 +37,11 @@ class FakeDataModel extends core\Model
     public function loadFakeData()
     {
         $storageList = new library\StorageList();
-        $fakeData = $_SESSION['fakeData'];
+        if (isset($_SESSION['fakeData'])) {
+            $fakeData = $_SESSION['fakeData'];
+        } else {
+            $fakeData = [];
+        }
         //load brands
         $brands = [];
         if (isset($fakeData['brands'])) {
@@ -79,6 +83,41 @@ class FakeDataModel extends core\Model
             'capacity' => $args['capacity']
         ];
     }
+
+
+    public function addBrand($args)
+    {
+        if (isset($_SESSION) && isset($_SESSION['fakeData']) && isset($_SESSION['fakeData']['brands'])) {
+            $_SESSION['fakeData']['brands'][] = $args;
+        } elseif(isset($_SESSION) && isset($_SESSION['fakeData'])) {
+            $_SESSION['fakeData']['brands'] = [];
+            $_SESSION['fakeData']['brands'][] = $args;
+        } else {
+            $_SESSION['fakeData'] = [];
+            $_SESSION['fakeData']['brands'] = [];
+            $_SESSION['fakeData']['brands'][] = $args;
+        }
+        $brand = new library\Brand($args['name'], $args['category']);
+        $this->brands[] = $brand;
+    }
+
+    public function addNewProduct($args) //$id, $name, $price, $brand, $p
+    {
+        if (isset($_SESSION) && isset($_SESSION['fakeData']) && isset($_SESSION['fakeData']['products'])) {
+            $_SESSION['fakeData']['products'][] = $args;
+        } elseif(isset($_SESSION) && isset($_SESSION['fakeData'])) {
+            $_SESSION['fakeData']['products'] = [];
+            $_SESSION['fakeData']['products'][] = $args;
+        } else {
+            $_SESSION['fakeData'] = [];
+            $_SESSION['fakeData']['products'] = [];
+            $_SESSION['fakeData']['products'][] = $args;
+        }
+        $currBrand = $this->getBrandByName($args['brand']);
+        $type = "app\\library\\".$args['type'];
+        $p = new $type($args['id'], $args['name'], $args['price'], $currBrand, $args['p']);
+        $this->storageList->addProduct($p, $args['amount']);
+}
 
     public function addProductById($id, $amount=1)
     {
